@@ -10,18 +10,29 @@
 </head>
 <body class="antialiased h-screen w-screen bg-slate-100 flex items-center justify-center">
 <ul role="list" class="divide-y divide-gray-100">
-    @foreach($passwords as $password)
+<h1 class="text-3xl font-semibold mb-6">Mots de passe de l'utilisateur</h1>
 
-    <li class="flex justify-between gap-x-6 py-5">
-        <div class="flex min-w-0 gap-x-4">
-            <div class="h-12 w-12 flex items-center justify-center text-4xl rounded-full bg-slate-950 text-white uppercase">{{ $password['initial'] }}</div>
-            <div class="min-w-0 flex-auto">
-                <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ $password['url'] }}</p>
-                <p class="text-sm font-semibold leading-6 text-gray-900">{{ $password['email'] }}</p>
-            </div>
-        </div>
-    </li>
-    @endforeach
+@if($passwords->isEmpty())
+    <p class="text-gray-500">Aucun mot de passe enregistré.</p>
+@else
+    <ul>
+        @foreach($passwords as $password)
+            <li class="mb-4">
+                <div class="flex items-center justify-between border-b border-gray-300 py-2">
+                    <div class="flex items-center">
+                        <div class="h-8 w-8 flex items-center justify-center text-xl rounded-full bg-blue-500 text-white">{{ $password->initial }}</div>
+                        <div class="ml-4">
+                            <p class="text-sm font-semibold text-gray-800">{{ $password->url }}</p>
+                            <p class="text-xs text-gray-500">{{ $password->login }}</p>
+                            <a href="password_modify/{{$password->id}}" class= "text-xs text-gray-500">{{ $password->password }}</a>
+                            <!-- Ajoutez d'autres champs si nécessaire -->
+                        </div>
+                    </div>
+                </div>
+            </li>
+        @endforeach
+    </ul>
+@endif
 </ul>
 
 </body>

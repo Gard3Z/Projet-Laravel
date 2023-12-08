@@ -19,9 +19,20 @@
                 <div class="text-center">
                     <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Unlock peace of mind – one password at a time!</h1>
                     <p class="mt-6 text-lg leading-8 text-gray-600">Our password manager app simplifies your digital life by storing  your passwords, so you can focus on what matters most online.</p>
+
+                    <div class="mt-10 flex items-center justify-center gap-x-6">
+                        <a href="{{ route('login') }}">Login</a>
+                        <p>|</p>
+                        <a href="{{ route('register') }}">Register</a>
+                    </div>
+                    
                     <div class="mt-10 flex items-center justify-center gap-x-6">
                         <a href="{{ route('passwords.create') }}" class="rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950">Add a password</a>
                         <a href="{{ route('passwords.index') }}" class="text-sm font-semibold leading-6 text-gray-900">See all passwords <span aria-hidden="true">→</span></a>
+                    </div>
+
+                    <div class="mt-10 flex items-center justify-center gap-x-6">
+                        <a href="{{ route('team.create') }}" class="rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950">Create your team</a>
                     </div>
                 </div>
             </div>

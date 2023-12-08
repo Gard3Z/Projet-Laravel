@@ -1,70 +1,71 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
+use App\Models\Password;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{File, Storage, Validator};
-use Illuminate\View\View;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PasswordController extends Controller
 {
-    public function index(): View {
-        # Take all files in storage/passwords
-        # Iterate and for each file, read content and update it to fit view requirements
-        $passwords = collect(
-            File::allFiles(storage_path('app/passwords'))
-        )
-            ->map(function(\SplFileInfo $file) {
-                $content = json_decode(Storage::get('passwords/' . $file->getFilename()), true);
+        public function store(Request $request)
+        {
+            $rules = [
+                'url' => 'required|string|url',
+                'login' => 'required|string',
+                'password' => 'required|string',
+            ];
 
-                # Add an initial entry in $content with the first letter of url domain
-                data_set($content, 'initial', substr(explode('//', $content['url'])[1], 0, 1));
+            $validator = Validator::make($request->all(), $rules);
+// dd($request->all());
+            if ($validator->fails()) {
+                return redirect('passwords.create')->withErrors($validator);
+            }
 
-                return $content;
-            });
+            $user = Auth::user();
 
-        # Return password list view with all passwords content
-        return view('show_passwords', ['passwords' => $passwords]);
-    }
+            Password::create([
+                "site" => $request->url,
+                "login" => $request->login,
+                "password" => $request->password, // Utilisez bcrypt pour hacher le mot de passe
+                "user_id" => $user->id,
+            ]);
 
-    public function create(): View {
-        # Return form view
-        return view('password_create');
-    }
-
-    public function store(Request $request): RedirectResponse
-    {
-        # Validation rules according to exercise
-        $validator = Validator::make($request->all(), [
-            'url' => 'required|string|url',
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-
-        # If something does not match rules, redirect to form
-        # with errors by input
-        if ($validator->fails()) {
-            return redirect(route("passwords.create"))
-                ->withErrors($validator)
-                ->withInput();
+            return redirect('show-password');
         }
 
-        # Get validated values as array
-        $safe = $validator->safe()->toArray();
+        // PasswordController.php
 
-        # Encrypt password in $safe array
-        data_set($safe, 'password', bcrypt($safe['password']));
+        public function showPasswords()
+        {
+            $user = Auth::user();
+            $passwords = $user->passwords; // Assurez-vous que votre relation dans le modèle User est correctement définie
 
-        # Store validated in a json file under storage/app/passwords
-        # To ensure one file per validated request, use datetime checksum
-        # Tell PHP to not escape content + make it clean
-        Storage::put(
-            'passwords/' . md5(now()->toDateTimeString()) . '.json',
-            json_encode($safe, JSON_UNESCAPED_SLASHES, JSON_PRETTY_PRINT)
-        );
+            return view('show_passwords', ['passwords' => $passwords]);
+        }
 
-        # Redirect to landing
-        return redirect(route("landing"));
+        public function modify(Request $request, int $id)
+        {
+            $rules = [
+                'password' => 'required|string',
+            ];
+
+            $validator = Validator::make($request->all(), $rules);
+//dd($request->all());
+            if ($validator->fails()) {
+                return redirect('passwords.create')->withErrors($validator);
+            }
+
+            $user = Auth::user();
+
+            Password::find($id)->update([
+                "password" => $request->password,
+            ]);
+            return redirect('show-password');
+        }
+
     }
-}
+
+?>
