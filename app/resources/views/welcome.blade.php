@@ -33,6 +33,11 @@
 
                     <div class="mt-10 flex items-center justify-center gap-x-6">
                         <a href="{{ route('team.create') }}" class="rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950">Create your team</a>
+                        <a href="{{ route('team.index') }}" class="text-sm font-semibold leading-6 text-gray-900">See all teams <span aria-hidden="true">→</span></a>
+                    </div>
+
+                    <div class="mt-10 flex items-center justify-center gap-x-6">
+                        <a href="{{ route('team.invite') }}" class="rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950">Invite team</a>
                     </div>
                 </div>
             </div>

@@ -36,8 +36,7 @@ class PasswordController extends Controller
             return redirect('show-password');
         }
 
-        // PasswordController.php
-
+        
         public function showPasswords()
         {
             $user = Auth::user();
@@ -60,7 +59,7 @@ class PasswordController extends Controller
 
             $user = Auth::user();
 
-            Password::find($id)->update([
+            Password::find($id)->update([ 
                 "password" => $request->password,
             ]);
             return redirect('show-password');

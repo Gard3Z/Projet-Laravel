@@ -19,7 +19,7 @@ use App\Http\Controllers\TeamController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('/');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -56,6 +56,18 @@ Route::post('/create-team', function () {
 })->name('team.store');
 
 Route::post('/create-team', [TeamController::class, 'store'])->name('team.store'); // exemple de route avec un controller
+
+Route::get('/show-team', function () {
+    return view('show_teams');
+})->name('team.index');
+
+Route::get('/show-team', [TeamController::class, 'index'])->name('team.index'); // exemple de route avec un controller
+
+Route::get('/team_invite', function () {
+    return view('team_invite');
+})->name('team.invite');
+
+Route::post('/team_invite', [TeamController::class, 'joinTeam'])->name('team.invite');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
