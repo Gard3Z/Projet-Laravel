@@ -36,6 +36,31 @@ class PasswordController extends Controller
             return redirect('show-password');
         }
 
+        // fonction pour rediriger vers password_create.blade.php
+        public function password_create()
+        {
+            return view('password_create');
+        }
+
+        // fonction pour rediriger vers show_passwords.blade.php
+        public function show_passwords()
+        {
+            return view('show_passwords');
+        }
+
+        // fonction pour rediriger vers password_modify.blade.php
+        public function password_modify()
+        {
+            return view('password_modify');
+        }
+
+        public function showModifyForm(int $id)
+        {
+
+
+            return view('password_modify', ['id' => $id]);
+        }
+
         
         public function showPasswords()
         {

@@ -9,14 +9,21 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 </head>
 <body class="antialiased h-screen w-screen bg-slate-100 flex items-center justify-center">
+
+<div class="absolute top-5 left-50 mt-1 mr-1 text-sm font-semibold leading-4 text-gray-900">
+    <a href="{{ route('/') }}" ><img class="w-10" src="./maison.png" alt=""></a>
+</div>
+
 <ul role="list" class="divide-y divide-gray-100">
-<a href="{{ route('/') }}" class="text-3xl font-semibold mb-6">Home</a>
-<h1 class="text-3xl font-semibold mb-6">Teams de l'utilisateur</h1>
+
+<div class="text-center">
+    <h1 class="text-4xl mb-10 font-bold tracking-tight text-gray-900 sm:text-4xl ">{{__('content-page.show-teams.title')}}</h1>
+</div>
 
 @if($teams->isEmpty())
-    <p class="text-gray-500">Aucune teams enregistré.</p>
+    <p class="text-gray-500">{{__('content-page.show-teams.no-team')}}</p>
 @else
-    <ul>
+    <ul class="max-h-80">
         @foreach($teams as $team)
             <li class="mb-4">
                 <div class="flex items-center justify-between border-b border-gray-300 py-2">

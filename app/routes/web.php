@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
-
+use App\Models\Password;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,56 +18,17 @@ use App\Http\Controllers\TeamController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('/');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/create-password', function () {
-    return view('password_create');
-})->name('passwords.create');
-
-Route::post('/password-store', function () {
-    return view('password_create');
-})->name('passwords.store');
-
-Route::post('/password-store', [PasswordController::class, 'store'])->name('passwords.store'); // exemple de route avec un controller
-
-Route::get('/show-password', function () {
-    return view('show_passwords');
-})->name('passwords.index');
-
-Route::get('/show-password', [PasswordController::class, 'showPasswords'])->name('passwords.index'); // exemple de route avec un controller
-
-Route::get('/password_modify/{id}',  function ($id) {
-    return view('password_modify', ['id' => $id]);
-})->name('password.modify'); // exemple de route avec un controller
-
-Route::post('/password_modify/{id}',[PasswordController::class, 'modify'])->name('password.modify');
-
-Route::get('/create-team', function () {
-    return view('team_create');
-})->name('team.create');
-
-Route::post('/create-team', function () {
-    return view('team_create');
-})->name('team.store');
-
-Route::post('/create-team', [TeamController::class, 'store'])->name('team.store'); // exemple de route avec un controller
-
-Route::get('/show-team', function () {
-    return view('show_teams');
-})->name('team.index');
-
-Route::get('/show-team', [TeamController::class, 'index'])->name('team.index'); // exemple de route avec un controller
-
-Route::get('/team_invite', function () {
-    return view('team_invite');
-})->name('team.invite');
-
+Route::get('/', [Controller::class, 'welcome'])->name('/');
+Route::get('/dashboard', [Controller::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/create-password', [PasswordController::class, 'password_create'])->name('passwords.create');
+Route::post('/password-store', [PasswordController::class, 'store'])->name('passwords.store');
+Route::get('/show-password', [PasswordController::class, 'showPasswords'])->name('passwords.index');
+Route::get('/password_modify/{id}', [PasswordController::class, 'showModifyForm'])->name('password.modify');
+Route::post('/password_modify/{id}', [PasswordController::class, 'modify'])->name('password.modify');
+Route::get('/create-team', [TeamController::class, 'team_create'])->name('team.create');
+Route::post('/create-team', [TeamController::class, 'store'])->name('team.store');
+Route::get('/show-team', [TeamController::class, 'index'])->name('team.index');
+Route::get('/team_invite', [TeamController::class, 'team_invite'])->name('team.invite');
 Route::post('/team_invite', [TeamController::class, 'joinTeam'])->name('team.invite');
 
 Route::middleware('auth')->group(function () {

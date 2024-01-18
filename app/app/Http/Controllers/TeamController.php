@@ -41,6 +41,24 @@ class TeamController extends Controller
         return redirect()->route('team.index');
     }
 
+    // fonction pour rediriger vers team_create.blade.php
+    public function team_create()
+    {
+        return view('team_create');
+    }
+
+    // fonction pour rediriger vers show_teams.blade.php
+    public function show_teams()
+    {
+        return view('show_teams');
+    }
+
+    // fonction pour rediriger vers team.invite.blade.php
+    public function team_invite()
+    {
+        return view('team_invite');
+    }
+
     
     public function index()
 {

@@ -38,12 +38,12 @@ class joinTeam extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('Un nouvel utilisateur a été ajouté à votre équipe.')
-            ->line('Nom de l\'utilisateur ajouté: ' . $this->userAdded->name)
-            ->line('Nom de l\'utilisateur ajoutant: ' . $this->userAdding->name)
-            ->line('Date et heure de l\'ajout: ' . now())
-            ->action('Voir l\'équipe', route('team.index'))
-            ->line('Merci d\'utiliser notre application !');
+            ->line(__('notification.joinTeam.mail.new-member'))
+            ->line(__('notification.joinTeam.mail.user-added') . $this->userAdded->name)
+            ->line(__('notification.joinTeam.mail.user-adding') . $this->userAdding->name)
+            ->line(__('notification.joinTeam.mail.add-dt') . now())
+            ->action('notification.joinTeam.mail.show-team', route('team.index'))
+            ->line('notification.joinTeam.mail.thanx-app');
     }
 
     /**

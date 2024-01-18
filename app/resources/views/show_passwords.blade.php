@@ -10,12 +10,18 @@
 </head>
 <body class="antialiased h-screen w-screen bg-slate-100 flex items-center justify-center">
     
+<div class="absolute top-5 left-50 mt-1 mr-1 text-sm font-semibold leading-4 text-gray-900">
+        <a href="{{ route('/') }}" ><img class="w-10" src="./maison.png" alt=""></a>
+</div>
+
 <ul role="list" class="divide-y divide-gray-100">
-<a href="{{ route('/') }}" class="text-3xl font-semibold mb-6">Home</a>
-<h1 class="text-3xl font-semibold mb-6">Mots de passe de l'utilisateur</h1>
+
+<div class="text-center">
+    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl ">{{__('content-page.show-passwords.title')}}</h1>
+</div>
 
 @if($passwords->isEmpty())
-    <p class="text-gray-500">Aucun mot de passe enregistré.</p>
+    <p class="text-gray-500">{{__('content-page.show-passwords.no-password')}}</p>
 @else
     <ul>
         @foreach($passwords as $password)

@@ -9,11 +9,21 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 </head>
 <body class="antialiased h-screen w-screen bg-slate-100 flex items-center justify-center">
+
+
+    <div class="absolute top-5 left-50 mt-1 mr-1 text-sm font-semibold leading-4 text-gray-900">
+        <a href="{{ route('/') }}" ><img class="w-10" src="./maison.png" alt=""></a>
+    </div>
+
     <form action="{{route('passwords.store')}}" method="POST"  class="space-y-8 w-1/2">
         @csrf
 
+        <div class="text-center">
+                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{__('content-page.create-password.title')}}</h1>
+        </div>
+
         <div>
-            <label for="url" class="block text-sm font-medium leading-6 text-gray-900">Url</label>
+            <label for="url" class="block text-sm font-medium leading-6 text-gray-900">URL</label>
             <div class="relative mt-2 rounded-md shadow-sm">
                 <input type="url" name="url" id="url"
                        class="block w-full rounded-md border-0 py-1.5 pr-10 @error('url') text-red-900 placeholder:text-red-300 ring-red-300 focus:ring-red-500 @enderror ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -33,11 +43,11 @@
 
 
         <div>
-            <label for="login" class="block text-sm font-medium leading-6 text-gray-900">Login</label>
+            <label for="login" class="block text-sm font-medium leading-6 text-gray-900">{{__('content-page.create-password.login')}}</label>
             <div class="relative mt-2 rounded-md shadow-sm">
                 <input type="text" name="login" id="login"
                        class="block w-full rounded-md border-0 py-1.5 pr-10 @error('email') text-red-900 placeholder:text-red-300 ring-red-300 focus:ring-red-500 @enderror ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                       placeholder="Pseudo" value="" aria-invalid="true" aria-describedby="login-error">
+                       placeholder="{{__('content-page.create-password.login')}}" value="" aria-invalid="true" aria-describedby="login-error">
                 @error('login')
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                     <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -52,11 +62,11 @@
         </div>
 
         <div>
-            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">{{__('content-page.create-password.password')}}</label>
             <div class="relative mt-2 rounded-md shadow-sm">
                 <input type="password" name="password" id="password"
                        class="block w-full rounded-md border-0 py-1.5 pr-10 @error('password') text-red-900 placeholder:text-red-300 ring-red-300 focus:ring-red-500 @enderror ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                       aria-invalid="true" aria-describedby="password-error">
+                       aria-invalid="true" aria-describedby="password-error" placeholder="{{__('content-page.create-password.password')}}" value="">
                 @error('password')
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                     <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -72,7 +82,7 @@
 
 
 
-        <button type="submit" class="w-full rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700">Save</button>
+        <button type="submit" class="w-full rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700">{{__('content-page.create-password.save')}}</button>
     </form>
 </body>
 </html>

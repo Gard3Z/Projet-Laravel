@@ -12,12 +12,16 @@
     <form action="{{route('password.modify', $id)}}" method="POST"  class="space-y-8 w-1/2">
         @csrf
 
+        <div class="text-center">
+                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{__('content-page.modify-password.title')}}</h1>
+        </div>
+
         <div>
-            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">New Password</label>
+            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">{{__('content-page.modify-password.password')}}</label>
             <div class="relative mt-2 rounded-md shadow-sm">
                 <input type="password" name="password" id="password"
                        class="block w-full rounded-md border-0 py-1.5 pr-10 @error('password') text-red-900 placeholder:text-red-300 ring-red-300 focus:ring-red-500 @enderror ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                       aria-invalid="true" aria-describedby="password-error">
+                       aria-invalid="true" aria-describedby="password-error" placeholder="{{__('content-page.modify-password.password')}}">
                 @error('password')
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                     <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -33,7 +37,7 @@
 
 
 
-        <button type="submit" class="w-full rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700">Save</button>
+        <button type="submit" class="w-full rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700">{{__('content-page.modify-password.save')}}</button>
     </form>
 </body>
 </html>
