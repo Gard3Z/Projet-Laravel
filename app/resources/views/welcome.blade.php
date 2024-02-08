@@ -22,32 +22,36 @@
                     <p class="mt-6 text-lg leading-8 text-gray-600">{{__('content-page.welcome.subtitle')}}</p>
 
                     <div class="mt-10 flex items-center justify-center gap-x-6">
+                        @auth
+                            <p>{{ auth()->user()->name }}</p>
+                            <p>|</p>
+                            <a href="{{ route('dashboard') }}" class="rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950">{{__('content-page.welcome.dashboard')}}</a>
+                        @else
+                            <a href="{{ route('login') }}">{{__('content-page.welcome.login')}}</a>
+                            <p>|</p>
+                            <a href="{{ route('register') }}">{{__('content-page.welcome.register')}}</a>
+                        @endauth
+                    </div>
 
-                    @auth
-                        <p>{{ auth()->user()->name }}</p>
-                        <p>|</p>
-                        <a href="{{ route('dashboard') }}" class="rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950">{{__('content-page.welcome.dashboard')}}</a>
-                    @else
-                        <a href="{{ route('login') }}">{{__('content-page.welcome.login')}}</a>
-                        <p>|</p>
-                        <a href="{{ route('register') }}">{{__('content-page.welcome.register')}}</a>
-                    @endauth
-
-
-                </div>
-                    
                     <div class="mt-10 flex items-center justify-center gap-x-6">
+                        @auth
                         <a href="{{ route('passwords.create') }}" class="rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950">{{__('content-page.welcome.add-password')}}</a>
-                        <a href="{{ route('passwords.index') }}" class="text-sm font-semibold leading-6 text-gray-900">{{__('content-page.welcome.see-all-passwords')}} <span aria-hidden="true">→</span></a>
+                            <a href="{{ route('passwords.index') }}" class="text-sm font-semibold leading-6 text-gray-900">{{__('content-page.welcome.see-all-passwords')}} <span aria-hidden="true">→</span></a>
+                        @endauth
+                    </div>
+
+
+                    <div class="mt-10 flex items-center justify-center gap-x-6">
+                        @auth
+                            <a href="{{ route('team.create') }}" class="rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950">{{__('content-page.welcome.add-team')}}</a>
+                            <a href="{{ route('team.index') }}" class="text-sm font-semibold leading-6 text-gray-900">{{__('content-page.welcome.see-all-teams')}} <span aria-hidden="true">→</span></a>
+                        @endauth
                     </div>
 
                     <div class="mt-10 flex items-center justify-center gap-x-6">
-                        <a href="{{ route('team.create') }}" class="rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950">{{__('content-page.welcome.add-team')}}</a>
-                        <a href="{{ route('team.index') }}" class="text-sm font-semibold leading-6 text-gray-900">{{__('content-page.welcome.see-all-teams')}} <span aria-hidden="true">→</span></a>
-                    </div>
-
-                    <div class="mt-10 flex items-center justify-center gap-x-6">
-                        <a href="{{ route('team.invite') }}" class="rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950">{{__('content-page.welcome.add-member')}}</a>
+                        @auth
+                            <a href="{{ route('team.invite') }}" class="rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950">{{__('content-page.welcome.add-member')}}</a>
+                        @endauth
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    
+
         /*
         |--------------------------------------------------------------------------
         | Content page Language Lines
@@ -13,7 +13,7 @@ return [
         |
         */
 
-        
+
 
         "welcome" => [
             "title" => "Ayez l’esprit tranquille – un mot de passe à la fois !",
@@ -27,6 +27,11 @@ return [
             "add-team" => "Ajouter une équipe",
             "see-all-teams" => "Voir toutes les équipes",
             "add-member" => "Ajouter un membre",
+        ],
+
+        "dashboard" => [
+            "login" => "Tu es connecté !",
+            "welcome" => "Retourné à la page d'accueil",
         ],
 
         "create-password" => [

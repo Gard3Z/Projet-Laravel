@@ -27,6 +27,11 @@ return [
         "add-member" => "Add a Member",
     ],
 
+    "dashboard" => [
+        "login" => "You are logged in!",
+        "welcome" => "Back to welcome page",
+    ],
+
     "create-password" => [
         "title" => "Add a Password",
         "login" => "Username",
